@@ -25,6 +25,7 @@ class BookSaleItem {
 
    public void setAmount(int amount) {
       this.amount = amount;
+      this.setTotal(this.getAmount() * this.getPrice());
    }
 
    public void setPrice(double price) {
@@ -115,8 +116,7 @@ class BookSaleRecordSystem {
    private int search(BookSaleItem item) {
        System.out.println("[LOG] Searching in " + sale_items.size() + " items");
        for (int i = 0; i < sale_items.size(); ++i) {
-          System.out.println("[LOG] " + sale_items.get(i).getNumber() + " <-> " + item.getNumber());
-          if (sale_items.get(i).getNumber() == item.getNumber()) {
+          if (sale_items.get(i).getNumber().compareTo(item.getNumber()) == 0) {
              System.out.println("[LOG] Found at index " + i);
              return i;
           }
@@ -156,9 +156,6 @@ class BookSaleRecordSystem {
 
 public class RecordSystem {
    public static void main(String[] args) throws IOException {
-      System.out.println("123" == "123");
-
-
        BookSaleRecordSystem system = new BookSaleRecordSystem();
        system.add(new BookSaleItem("101", "The Model Thinker", 30, 25.5, "Apress"));
        system.add(new BookSaleItem("102", "Think in Java", 100, 125.9, "Apress"));
